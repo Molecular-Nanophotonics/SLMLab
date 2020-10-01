@@ -1,0 +1,2 @@
+C:\Users\MoNa\source\repos\SLMLab\x64\Debug\SLMLab.dll
+C:\Users\MoNa\source\repos\SLMLab\x64\Debug\SLMLab.pdb
