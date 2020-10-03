@@ -1,4 +1,0 @@
-﻿     Creating library C:\Users\mona\Desktop\SLMLab\x64\Release\SLMLab.lib and object C:\Users\mona\Desktop\SLMLab\x64\Release\SLMLab.exp
-  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
-  SLMLab.vcxproj -> C:\Users\mona\Desktop\SLMLab\x64\Release\SLMLab.dll
-  SLMLab.vcxproj -> C:\Users\mona\Desktop\SLMLab\x64\Release\SLMLab.pdb (Full PDB)

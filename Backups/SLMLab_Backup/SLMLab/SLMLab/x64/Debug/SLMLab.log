@@ -1,0 +1,7 @@
+﻿  Compiling CUDA source file GeneratePhaseCUDA.cu...
+  
+  c:\Users\mona\documents\visual studio 2015\Projects\SLMLab\SLMLab>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin\nvcc.exe" -gencode=arch=compute_35,code=\"sm_35,compute_35\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_WINDLL -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc140.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\GeneratePhaseCUDA.cu.obj "c:\Users\mona\documents\visual studio 2015\Projects\SLMLab\SLMLab\GeneratePhaseCUDA.cu" 
+  GeneratePhaseCUDA.cu
+     Creating library c:\Users\mona\documents\visual studio 2015\Projects\SLMLab\x64\Debug\SLMLab.lib and object c:\Users\mona\documents\visual studio 2015\Projects\SLMLab\x64\Debug\SLMLab.exp
+  SLMLab.vcxproj -> c:\Users\mona\documents\visual studio 2015\Projects\SLMLab\x64\Debug\SLMLab.dll
+  SLMLab.vcxproj -> c:\Users\mona\documents\visual studio 2015\Projects\SLMLab\x64\Debug\SLMLab.pdb (Full PDB)
