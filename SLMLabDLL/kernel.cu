@@ -70,7 +70,7 @@ Setup in Visual Studio:
 #define M_PI 3.14159265358979323846f
 #endif
 
-#define MAX_SPOTS 256   // Decrease if GPU keeps running out of memory
+#define MAX_SPOTS 1024   // Decrease if GPU keeps running out of memory
 
 #define BLOCK_SIZE 256	// Should be a power of 2
 #define SLM_SIZE 512
@@ -106,7 +106,6 @@ inline void mCheckError(int line, char* file);
 inline void mSafeCall(cudaError_t status, int line, char* file);
 //#define M_CUFFT_SAFE_CALL(cuffterror) mCufftSafeCall(cuffterror, __LINE__, __FILE__)
 //inline void mCufftSafeCall(cufftResult_t status, int line, char *file);
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +171,7 @@ extern "C" __declspec(dllexport) int generatePhase(unsigned char* h_pSLM_uc, flo
 	else if (N_spots < 3) // Select the "Lenses and Prism" if the number of spots is < 3. The "Lenses and Prism" algorithm produces optimal holograms for 1 or 2 spots.
 		method = 0;
  
-	memsize_spotsf = N_spots * sizeof(float); // ???
+	memsize_spotsf = N_spots * sizeof(float); // Required ???
 	computeAndCopySpotData(I_spots, x_spots, y_spots, z_spots, N_spots, method);
 
 	switch (method)

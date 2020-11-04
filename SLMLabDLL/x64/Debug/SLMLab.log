@@ -1,39 +1,41 @@
 ﻿  Compiling CUDA source file kernel.cu...
   
   C:\Users\MoNa\Desktop\SLMLab\SLMLabDLL>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\HostX86\x64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_WINDLL -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\Users\MoNa\Desktop\SLMLab\SLMLabDLL\kernel.cu" 
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(221): warning : conversion from a string literal to "char *" is deprecated
+  
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(222): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(223): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(224): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(317): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(318): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(319): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(320): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(323): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(324): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(325): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(326): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(328): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(329): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(330): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(331): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(332): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(333): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(337): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(338): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(339): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(340): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(342): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(343): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(362): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(363): warning : conversion from a string literal to "char *" is deprecated
   
@@ -41,51 +43,51 @@ C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(364): warning : conversion from
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(365): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(366): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(368): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(369): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(371): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(372): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(373): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(374): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(486): warning : variable "tid" was declared but never referenced
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(487): warning : variable "tid" was declared but never referenced
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(221): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(222): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(223): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(224): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(317): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(318): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(319): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(320): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(323): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(324): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(325): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(326): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(328): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(329): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(330): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(331): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(332): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(333): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(337): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(338): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(339): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(340): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(342): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(343): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(362): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(363): warning : conversion from a string literal to "char *" is deprecated
   
@@ -93,16 +95,14 @@ C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(364): warning : conversion from
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(365): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(366): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(368): warning : conversion from a string literal to "char *" is deprecated
   
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(369): warning : conversion from a string literal to "char *" is deprecated
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(371): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(372): warning : conversion from a string literal to "char *" is deprecated
   
 C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(373): warning : conversion from a string literal to "char *" is deprecated
-  
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(374): warning : conversion from a string literal to "char *" is deprecated
   
   kernel.cu
-C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(331): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:/Users/MoNa/Desktop/SLMLab/SLMLabDLL/kernel.cu(330): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SLMLab.vcxproj -> C:\Users\MoNa\Desktop\SLMLab\SLMLabDLL\x64\Debug\SLMLab.dll
