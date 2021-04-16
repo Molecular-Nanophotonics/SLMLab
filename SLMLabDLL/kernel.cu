@@ -59,6 +59,10 @@ Setup in Visual Studio:
 #include <stdio.h>
 #include <math.h>
 
+#include <string.h>
+#include <math.h>
+
+
 //#include <stdint.h>
 #include <cufft.h>
 
@@ -66,7 +70,7 @@ Setup in Visual Studio:
 #define M_PI 3.14159265358979323846f
 #endif
 
-#define MAX_SPOTS 256   // Decrease if GPU keeps running out of memory
+#define MAX_SPOTS 1024   // Decrease if GPU keeps running out of memory
 
 #define BLOCK_SIZE 256	// Should be a power of 2
 #define SLM_SIZE 512
@@ -83,7 +87,7 @@ inline int computeAndCopySpotData(float* h_I, float* x, float* y, float* z, int 
 
 __global__ void LensesAndPrisms(unsigned char* g_SLMuc);
 
-__global__ void ReplaceAmpsSLM_FFT(float* g_aLaser, cufftComplex* g_cAmp, float* g_pSLMstart, bool last_iteration, unsigned char* g_pSLM_uc);
+__global__ void ReplaceAmpsSLM_FFT(float* g_aLaser, cufftComplex* g_cAmp, float* g_pSLMstart, bool getpSLM255, unsigned char* g_pSLM255_uc);
 __global__ void ReplaceAmpsSpots_FFT(cufftComplex* g_cSpotAmp_cc, cufftComplex* g_cSpotAmpNew_cc, int iteration, float* g_Iobtained, float* g_weight, bool last_iteration);
 
 __global__ void PropagateToSpotPositions_Fresnel(float* g_pSLM_f, float* g_spotRe_f, float* g_spotIm_f);
@@ -102,7 +106,6 @@ inline void mCheckError(int line, char* file);
 inline void mSafeCall(cudaError_t status, int line, char* file);
 //#define M_CUFFT_SAFE_CALL(cuffterror) mCufftSafeCall(cuffterror, __LINE__, __FILE__)
 //inline void mCufftSafeCall(cufftResult_t status, int line, char *file);
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +171,7 @@ extern "C" __declspec(dllexport) int generatePhase(unsigned char* h_pSLM_uc, flo
 	else if (N_spots < 3) // Select the "Lenses and Prism" if the number of spots is < 3. The "Lenses and Prism" algorithm produces optimal holograms for 1 or 2 spots.
 		method = 0;
  
-	//memsize_spotsf = N_spots * sizeof(float); // Required?
+	memsize_spotsf = N_spots * sizeof(float); // Required ???
 	computeAndCopySpotData(I_spots, x_spots, y_spots, z_spots, N_spots, method);
 
 	switch (method)
@@ -215,9 +218,9 @@ extern "C" __declspec(dllexport) int generatePhase(unsigned char* h_pSLM_uc, flo
 		////////////////////////////////////////////////////////////////////
 		// Generate phase using Fast Fourier Transform (2D)
 		////////////////////////////////////////////////////////////////////
-		cudaMemcpy(d_desiredAmp, h_desiredAmp, memsize_spotsf, cudaMemcpyHostToDevice); // M_SAFE_CALL()
-		cudaMemset(d_FFTd_cc, 0, memsize_SLMcc); // M_SAFE_CALL()
-		//M_CHECK_ERROR();
+		M_SAFE_CALL(cudaMemcpy(d_desiredAmp, h_desiredAmp, memsize_spotsf, cudaMemcpyHostToDevice)); 
+		M_SAFE_CALL(cudaMemset(d_FFTd_cc, 0, memsize_SLMcc)); 
+		M_CHECK_ERROR();
 		cudaDeviceSynchronize();
 		for (int l = 0; l < N_iterations; l++)
 		{
@@ -249,7 +252,6 @@ extern "C" __declspec(dllexport) int generatePhase(unsigned char* h_pSLM_uc, flo
 	default:
 		break;
 	}
-
 
 	// Handle CUDA errors
 	status = cudaGetLastError();
@@ -312,34 +314,32 @@ extern "C" __declspec(dllexport) int startCUDA(float* h_pSLMstart, int deviceId)
 	//M_SAFE_CALL(cudaMalloc((void**)&d_y, memsize_spotsf));
 	//M_SAFE_CALL(cudaMalloc((void**)&d_z, memsize_spotsf));
 	//M_SAFE_CALL(cudaMalloc((void**)&d_I, memsize_spotsf));
-	cudaMalloc((void**)&d_desiredAmp, memsize_spotsf); // M_SAFE_CALL()
-	cudaMalloc((void**)&d_weights, MAX_SPOTS * (maxIterations + 1) * sizeof(float)); // M_SAFE_CALL()
-	cudaMalloc((void**)&d_Iobtained, MAX_SPOTS * maxIterations * sizeof(float)); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaMalloc((void**)&d_desiredAmp, memsize_spotsf)); 
+	M_SAFE_CALL(cudaMalloc((void**)&d_weights, MAX_SPOTS * (maxIterations + 1) * sizeof(float))); 
+	M_SAFE_CALL(cudaMalloc((void**)&d_Iobtained, MAX_SPOTS * maxIterations * sizeof(float))); 
 
 	//M_SAFE_CALL(cudaMalloc((void**)&d_obtainedPhase, memsize_spotsf));
 	
-	cudaMalloc((void**)&d_pSLM_uc, memsize_SLMuc); // M_SAFE_CALL()
-	cudaMalloc((void**)&d_pSLMstart_f, memsize_SLM_f); // M_SAFE_CALL()
-	cudaMemset(d_pSLMstart_f, 0, N_pixels * sizeof(float)); // M_SAFE_CALL()
-
+	M_SAFE_CALL(cudaMalloc((void**)&d_pSLM_uc, memsize_SLMuc)); 
+	M_SAFE_CALL(cudaMalloc((void**)&d_pSLMstart_f, memsize_SLM_f)); 
+	M_SAFE_CALL(cudaMemset(d_pSLMstart_f, 0, N_pixels * sizeof(float))); 
 
 	// Memory allocations for Fresnel summation based GS algorithm 
-	cudaMalloc((void**)&d_spotRe_f, memsize_spotsf); // M_SAFE_CALL()
-	cudaMalloc((void**)&d_spotIm_f, memsize_spotsf); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaMalloc((void**)&d_spotRe_f, memsize_spotsf)); 
+	M_SAFE_CALL(cudaMalloc((void**)&d_spotIm_f, memsize_spotsf)); 
 	int data_w_pow2 = pow(2, ceil(log((float)data_w) / log(2.0f)));
-	cudaMalloc((void**)&d_pSLM_f, data_w_pow2*data_w_pow2 * sizeof(float)); //M_SAFE_CALL() // The size of d_pSLM_f must be a power of 2 for the Fresnel algorithm to work
-	cudaMemset(d_pSLM_f, 0, data_w_pow2*data_w_pow2 * sizeof(float)); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaMalloc((void**)&d_pSLM_f, data_w_pow2*data_w_pow2 * sizeof(float)));  // The size of d_pSLM_f must be a power of 2 for the Fresnel algorithm to work
+	M_SAFE_CALL(cudaMemset(d_pSLM_f, 0, data_w_pow2*data_w_pow2 * sizeof(float))); 
 	//cudaMemcpy(d_pSLM_f, h_pSLMstart, N_pixels * sizeof(float), cudaMemcpyHostToDevice); // // M_SAFE_CALL()
-
 
 	// Memory allocations for FFT based GS algorithm 
 	//M_SAFE_CALL(cudaMalloc((void**)&d_spot_index, MAX_SPOTS * sizeof(int)));
-	cudaMalloc((void**)&d_FFTd_cc, memsize_SLMcc); // M_SAFE_CALL()
-	cudaMalloc((void**)&d_FFTo_cc, memsize_SLMcc); // M_SAFE_CALL()
-	cudaMalloc((void**)&d_SLM_cc, memsize_SLMcc); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaMalloc((void**)&d_FFTd_cc, memsize_SLMcc)); 
+	M_SAFE_CALL(cudaMalloc((void**)&d_FFTo_cc, memsize_SLMcc)); 
+	M_SAFE_CALL(cudaMalloc((void**)&d_SLM_cc, memsize_SLMcc)); 
 	cudaDeviceSynchronize(); // M_SAFE_CALL()
 	//p2c << < n_blocks_Phi, BLOCK_SIZE >> >(d_SLM_cc, d_pSLM_f, N_pixels);
-	//M_CHECK_ERROR();
+	M_CHECK_ERROR();
 	cudaDeviceSynchronize();
 	cufftPlan2d(&plan, data_w, data_w, CUFFT_C2C); // M_CUFFT_SAFE_CALL()
 	//float *h_aLaserFFT = (float *)malloc(memsize_SLM_f); // !!! Not used.
@@ -359,18 +359,18 @@ extern "C" __declspec(dllexport) int stopCUDA()
 	//M_SAFE_CALL(cudaFree(d_z));
 	//M_SAFE_CALL(cudaFree(d_I));
 
-	cudaFree(d_weights); // M_SAFE_CALL()
-	cudaFree(d_Iobtained); // M_SAFE_CALL()
-	cudaFree(d_pSLMstart_f); // M_SAFE_CALL()
-	cudaFree(d_pSLM_uc); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaFree(d_weights)); 
+	M_SAFE_CALL(cudaFree(d_Iobtained)); 
+	M_SAFE_CALL(cudaFree(d_pSLMstart_f)); 
+	M_SAFE_CALL(cudaFree(d_pSLM_uc)); 
 
 	// Fresnel
-	cudaFree(d_pSLM_f); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaFree(d_pSLM_f)); 
 
 	// FFT
-	cudaFree(d_FFTd_cc); // M_SAFE_CALL()
-	cudaFree(d_FFTo_cc); // M_SAFE_CALL()
-	cudaFree(d_SLM_cc); // M_SAFE_CALL()
+	M_SAFE_CALL(cudaFree(d_FFTd_cc));
+	M_SAFE_CALL(cudaFree(d_FFTo_cc)); 
+	M_SAFE_CALL(cudaFree(d_SLM_cc));
 	cufftDestroy(plan); // //M_CUFFT_SAFE_CALL()
 
 	cudaDeviceReset();
@@ -743,8 +743,12 @@ inline void mCheckError(int line, char* file)
 			char CUDAmessage[200] = "CUDA says: ";
 			strcat(CUDAmessage, cudaGetErrorString(status));
 			sprintf(CUDAmessage, "%s\non line: %d\n", CUDAmessage, line);
-			AfxMessageBox(CUDAmessage);
-			exit(-1);
+			FILE* file;
+			file = fopen("Messages.txt", "w+");
+			fputs(CUDAmessage, file);
+			fclose(file);
+			//AfxMessageBox(CUDAmessage);
+			//exit(-1);
 		}
 		cudaDeviceSynchronize();
 		status = cudaGetLastError();
@@ -753,8 +757,12 @@ inline void mCheckError(int line, char* file)
 			char CUDAmessage[200] = "CUDA failed after sychronization:\n";
 			strcat(CUDAmessage, cudaGetErrorString(status));
 			sprintf(CUDAmessage, "%s\non line: %d\n", CUDAmessage, line);
-			AfxMessageBox(CUDAmessage);
-			exit(-1);
+			FILE* file;
+			file = fopen("Messages.txt", "w+");
+			fputs(CUDAmessage, file);
+			fclose(file);
+			//AfxMessageBox(CUDAmessage);
+			//exit(-1);
 		}
 	} while (0);
 #endif
@@ -771,9 +779,13 @@ inline void mSafeCall(cudaError_t status, int line, char* file)
 			char CUDAmessage[200] = "CUDA says: ";
 			strcat(CUDAmessage, cudaGetErrorString(status));
 			sprintf(CUDAmessage, "%s\non line: %d\n", CUDAmessage, line);
-			AfxMessageBox(CUDAmessage);
-			if (status != CUFFT_SUCCESS)
-				exit(-1);
+			FILE* file;
+			file = fopen("Messages.txt", "w+");
+			fputs(CUDAmessage, file);
+			fclose(file);
+			//AfxMessageBox(CUDAmessage);
+			//if (status != CUFFT_SUCCESS)
+			//	exit(-1);
 		}
 		cudaDeviceSynchronize();
 		status = cudaGetLastError();
@@ -782,8 +794,12 @@ inline void mSafeCall(cudaError_t status, int line, char* file)
 			char CUDAmessage[200] = "CUDA failed after sychronization:\n";
 			strcat(CUDAmessage, cudaGetErrorString(status));
 			sprintf(CUDAmessage, "%s\non line: %d\n", CUDAmessage, line);
-			AfxMessageBox(CUDAmessage);
-			exit(-1);
+			FILE* file;
+			file = fopen("Messages.txt", "w+");
+			fputs(CUDAmessage, file);
+			fclose(file);
+			//AfxMessageBox(CUDAmessage);
+			//exit(-1);
 		}
 	} while (0);
 #endif
