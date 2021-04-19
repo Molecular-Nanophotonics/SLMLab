@@ -105,6 +105,7 @@ $f_x = x/(\lambda f)$, $f_y = y/(\lambda f)$
 \boxed{
 E_\mathrm{Focus}(x,y) =  \frac{\mathrm e^{2\i kf}}{\i\lambda f}\,4\pi^2\,\check{E}_\mathrm{SLM}(f_x, f_y)
 }
+\label{Eq:EFocusXY}
 \end{align}
 
 Let's consider a the relation between the field at the SLM plane and the field at the planes different but close to the focal we find:
@@ -144,6 +145,19 @@ E_\mathrm{Focus}(x,y,z) \approx \frac{\mathrm e^{\i k(2f + z)}}{\i\lambda f}\e^{
 \boxed{
 E_\mathrm{Focus}(x,y,z) \approx \frac{\mathrm e^{\i k(2f + z)}}{\i\lambda f}\e^{-\i\frac{kz}{f^2}(x^2+y^2)}\mathcal F\left\{E_\mathrm{SLM}(x, y)\,\e^{-\i\frac{kz}{2f^2}(x^2 + y^2)}\right\}
 }
+\label{Eq:EFocusXYZ}
 \end{align}
+
+In the following, we will consider the incoming beam to be a uniform plane wave, \textit{i.e.}, $E_\mathrm{Beam}(x, y) = E_0$. The SLM is typically a two-dimensional pixellated device whose pixels have area $d^2$, row index $n_x = 1, \dots , N_x$ and column index $n_y = 1, \dots , N_y$. The complex amplitude imposed on the incoming beam by pixel $(n_x , n_y)$ is $A_{n_x, n_y} = A \exp(\i\varphi_{n_x ,n_y})$, where $A$ is an attenuation constant and $\varphi_{n_x ,n_y}$ the phase shift. Therefore, the electric field after the SLM is $E_{n_x, n_y} = E_0 A \exp(\i\varphi_{n_x ,n_y})$. From Eq. (\ref{Eq:EFocusXYZ}) we can now calculate the electric field in the trap volume around the focal plane of the objective as:
+\begin{align}
+E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\lambda f}\e^{-\i\frac{2\pi z}{\lambda f^2}(x^2+y^2)}d^2\sum_{n_x}^{N_x}\sum_{n_y}^{N_y} E_0 A\mathrm e^{\mathrm i \varphi_{n_x ,n_y} -\i\frac{\pi z}{\lambda f^2}(x^2 + y^2) -\i\frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y)}
+\end{align}
+\begin{align}
+E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\lambda f}\e^{-\i\frac{2\pi z}{\lambda f^2}(x^2+y^2)}d^2\sum_{n_x}^{N_x}\sum_{n_y}^{N_y} E_0 A\mathrm e^{\mathrm i \varphi_{n_x ,n_y} - \Delta_{n_x ,n_y}(x, y, z)}
+\end{align}
+\begin{align}
+\Delta_{n_x ,n_y}(x, y ,z) = \i\frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y) + \i\frac{\pi z}{\lambda f^2}(x^2 + y^2)
+\end{align}
+
 
 \end{document}
