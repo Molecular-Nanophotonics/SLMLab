@@ -148,16 +148,32 @@ E_\mathrm{Focus}(x,y,z) \approx \frac{\mathrm e^{\i k(2f + z)}}{\i\lambda f}\e^{
 \label{Eq:EFocusXYZ}
 \end{align}
 
-In the following, we will consider the incoming beam to be a uniform plane wave, \textit{i.e.}, $E_\mathrm{Beam}(x, y) = E_0$. The SLM is typically a two-dimensional pixellated device whose pixels have area $d^2$, row index $n_x = 1, \dots , N_x$ and column index $n_y = 1, \dots , N_y$. The complex amplitude imposed on the incoming beam by pixel $(n_x , n_y)$ is $A_{n_x, n_y} = A \exp(\i\varphi_{n_x ,n_y})$, where $A$ is an attenuation constant and $\varphi_{n_x ,n_y}$ the phase shift. Therefore, the electric field after the SLM is $E_{n_x, n_y} = E_0 A \exp(\i\varphi_{n_x ,n_y})$. From Eq. (\ref{Eq:EFocusXYZ}) we can now calculate the electric field in the trap volume around the focal plane of the objective as:
+In the following, we will consider the incoming beam to be a uniform plane wave, \textit{i.e.}, $E_\mathrm{Beam}(x, y) = E_0$. The SLM is typically a two-dimensional pixellated device whose pixels have area $d^2$, row index $n_x = 1, \dots , N_x$ and column index $n_y = 1, \dots , N_y$. The complex amplitude imposed on the incoming beam by pixel $(n_x , n_y)$ is $\alpha_{n_x, n_y} = \alpha \exp(\i\varphi_{n_x ,n_y})$, where $A$ is an attenuation constant and $\varphi_{n_x ,n_y}$ the phase shift. Therefore, the electric field after the SLM is $E_{n_x, n_y} = E_0\, \alpha\,\exp(\i\varphi_{n_x ,n_y})$. From Eq. (\ref{Eq:EFocusXYZ}) we can now calculate the electric field in the trap volume around the focal plane of the objective as:
 \begin{align}
-E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\lambda f}\e^{-\i\frac{2\pi z}{\lambda f^2}(x^2+y^2)}d^2\sum_{n_x}^{N_x}\sum_{n_y}^{N_y} E_0 A\mathrm e^{\mathrm i \varphi_{n_x ,n_y} -\i\frac{\pi z}{\lambda f^2}(x^2 + y^2) -\i\frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y)}
+E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\lambda f}\e^{-\i\frac{2\pi z}{\lambda f^2}(x^2+y^2)}d^2\sum_{n_x=1}^{N_x}\sum_{n_y=1}^{N_y} E_0\,\alpha\,\mathrm e^{\mathrm i \varphi_{n_x ,n_y} -\i\frac{\pi z}{\lambda f^2}(x^2 + y^2) -\i\frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y)}
 \end{align}
 \begin{align}
-E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\lambda f}\e^{-\i\frac{2\pi z}{\lambda f^2}(x^2+y^2)}d^2\sum_{n_x}^{N_x}\sum_{n_y}^{N_y} E_0 A\mathrm e^{\mathrm i \varphi_{n_x ,n_y} - \Delta_{n_x ,n_y}(x, y, z)}
+E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\lambda f}\e^{-\i\frac{2\pi z}{\lambda f^2}(x^2+y^2)}d^2\sum_{n_x=1}^{N_x}\sum_{n_y=1}^{N_y} E_0\,\alpha\,\mathrm e^{\i\left(\varphi_{n_x ,n_y} - \Delta_{n_x ,n_y}(x, y, z)\right)}
 \end{align}
 \begin{align}
-\Delta_{n_x ,n_y}(x, y ,z) = \i\frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y) + \i\frac{\pi z}{\lambda f^2}(x^2 + y^2)
+\Delta_{n_x ,n_y}(x, y ,z) = \frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y) + \frac{\pi z}{\lambda f^2}(x^2 + y^2)
 \end{align}
-
-
+The power, \textit{i.e.}, the total, time-averaged energy flux, right after the SLM is ($P_0 = I_0 A_\mathrm{SLM}$):
+\begin{align}
+P_0 = \frac{c\varepsilon_0}{2}N_xN_y\,d^2\left|E_0\right|^2\alpha^2
+\end{align}
+The time-averaged energy flux through a diffration-limited spot with area $f^2\lambda^2/(N_xN_yd^2)$ at $(x,y,z)$ is:
+\begin{align*}
+P(x,y,z) = \frac{c\varepsilon_0}{2}\frac{f^2\lambda^2}{N_xN_yd^2} \left|E_\mathrm{Focus}(x,y,z)\right|^2 = \frac{c\varepsilon_0}{2}\frac{f^2\lambda^2}{N_xN_yd^2}\frac{d^4}{\lambda^2f^2}\left|E_0\right|^2\alpha^2\left|\sum_{n_x=1}^{N_x}\sum_{n_y=1}^{N_y} \mathrm e^{\i\left(\varphi_{n_x ,n_y} - \Delta_{n_x ,n_y}(x, y, z)\right)}\right|^2
+\end{align*}
+We introduce the dimensionless variable:
+\begin{align}
+\boxed{
+V(x,y,z) = \frac{1}{N_xN_y}\sum_{n_x=1}^{N_x}\sum_{n_y=1}^{N_y} \mathrm e^{\i\left(\varphi_{n_x ,n_y} - \Delta_{n_x ,n_y}(x, y, z)\right)}
+}\ ,
+\end{align}
+defined as: 
+\begin{align}
+\left|V(x,y,z)\right|^2 = \frac{P(x,y,z)}{P_0}\ .
+\end{align}
 \end{document}
