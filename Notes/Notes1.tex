@@ -19,6 +19,7 @@
 \renewcommand{\vec}{\boldsymbol}
 \renewcommand{\i}{\mathrm i}
 \newcommand{\e}{\mathrm e}
+\DeclareMathOperator{\sinc}{sinc}
 
 \usepackage{paralist}
 
@@ -159,5 +160,17 @@ E_\mathrm{Focus}(x,y,z) = \frac{\mathrm e^{\i \frac{2\pi}{\lambda}(2f + z)}}{\i\
 \Delta_{n_x ,n_y}(x, y ,z) = \i\frac{2\pi}{\lambda f}(x_{n_x,n_y} x + y_{n_x,n_y}y) + \i\frac{\pi z}{\lambda f^2}(x^2 + y^2)
 \end{align}
 
+
+\begin{align}
+E_\mathrm{Focus}(u,v,w) = \e^{\i\frac{2\pi w}{\lambda}}\sum_{x,y} E_\mathrm{SLM}(x,y)\,\e^{-\i\frac{\pi w}{\lambda f^2}(x^2 + y^2)-\i\frac{2\pi}{\lambda f}(x u + y v)}
+\end{align}
+
+\begin{align}
+E_\mathrm{SLM}(x, y) = \sum E_\mathrm{Focus}(u,v,w)\,\e^{\i\frac{2\pi w}{\lambda}+\i\frac{\pi w}{\lambda f^2}(x^2 + y^2)+\i\frac{2\pi}{\lambda f}(x u + y v)}
+\end{align}
+
+\begin{align}
+I(u,v) = I_\mathrm{FFT}(u,v)\, \sinc^2\left(\frac{u}{2u_\mathrm{max}}\right)\sinc^2\left(\frac{v}{2v_\mathrm{max}}\right)
+\end{align}
 
 \end{document}
